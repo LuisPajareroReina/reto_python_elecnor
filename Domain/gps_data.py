@@ -1,16 +1,20 @@
-import json
 
 
 class GpsData:
-    def __init__(self ,matricula ,latitud ,longitud ,distance ,pos_date):
+
+    def __init__(self, matricula):
         self.matricula = matricula
-        self.latitud = []
-        self.longitud = []
-        self.distance = []
-        self.pos_date = []
-        self.data = {'Matricula': matricula,
-              'Latitud': latitud,
-              'Longitud': longitud,
-              'Distance': distance,
-              'Pos_date': pos_date
-              }
+        self.list_latitud = []
+        self.list_longitud = []
+        self.list_distance = []
+        self.list_pos_date = []
+
+    def add_gps_data(self, latitud, longitud, distance, pos_date):
+        self.list_latitud.append(latitud)
+        self.list_longitud.append(longitud)
+        self.list_distance.append(distance)
+        self.list_pos_date.append(pos_date)
+
+
+    def sum_of_distances(self):
+        return sum(self.list_distance)
