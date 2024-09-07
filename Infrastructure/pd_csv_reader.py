@@ -1,7 +1,6 @@
 import json
-
 import pandas as pd
-
+from Infrastructure.json_reader import JsonReader
 
 class PandasCsvReader:
 
@@ -16,7 +15,7 @@ class PandasCsvReader:
         for index, row in self.csvfile.iterrows():
             print(row)
 
-    def to_json(self):
+    def csv_to_json(self):
         for index, row in self.csvfile.iterrows():
             line = row.to_dict()  # JSON need dictionary structure
 
@@ -24,9 +23,7 @@ class PandasCsvReader:
             print(json_line)
 
             # Save each line into a json using the index as ID
-            json_name = 'Json_data/'+str(index) + '.json'
-            with open(json_name, 'w') as json_file:
-                json.dump(line, json_file, indent=5)
-
-
+            json_name = 'Json_data/' + str(index) + '.json'
+            jsonReader = JsonReader(json_name)
+            jsonReader.save_json(line)
 

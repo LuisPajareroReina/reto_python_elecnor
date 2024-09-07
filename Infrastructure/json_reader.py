@@ -37,4 +37,6 @@ class JsonReader:
 
         print("Número único de matriculas: ", num_unico_matriculas)
 
-
+    def save_json(self, data):
+        with open(self.path, 'w') as json_file:
+            json.dump(data, json_file, indent=5)
