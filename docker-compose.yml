@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+
+  db_reto_elecnor:
+    image: postgres:latest
+    container_name: contenedor_reto_elecnor
+    hostname: myhost
+    environment:
+      POSTGRES_DB: db_gps_data
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
