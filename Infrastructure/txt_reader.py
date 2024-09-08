@@ -12,8 +12,8 @@ class TxtHandler:
 
         txt.close()
 
-    def read_txt(self, txt_path):
-        with open(txt_path) as txt_file:
+    def read_txt(self):
+        with open(self.path) as txt_file:
             for line in txt_file:
                 if ',' in line:
                     matricula, pos_date = line.split(",")
