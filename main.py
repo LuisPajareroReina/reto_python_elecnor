@@ -1,4 +1,5 @@
 from flask import Flask
+import psycopg2
 
 from Infrastructure.pd_csv_reader import PandasCsvHandler
 from Infrastructure.json_reader import JsonHandler
@@ -18,7 +19,8 @@ CASO_3 = False
 CASO_4 = False
 CASO_5 = False
 CASO_6 = False
-CASO_7 = True
+CASO_7 = False
+CASO_8 = True
 
 # CASO 1. Empezamos por algo fácil: Lee el fichero CSV
 # e imprime cada línea
@@ -95,6 +97,49 @@ if CASO_7:
 
     sqlHandler = SqlHandler(SQL_FILE_PATH)
     sqlHandler.create_table_from_txt(TXT_PATH)
+
+# CASO 8. ¡¡La última!! Haz que el API REST del punto 6
+# lea de la base de datos del punto 7 en vez del fichero
+# del punto 5.
+
+if CASO_8:
+    def get_db_connection():
+        connection = psycopg2.connect(
+            database="db_gps_data",
+            user="admin",
+            password="admin",
+            host="localhost",
+            port="5432"
+        )
+        return connection
+
+
+    app = Flask(__name__)
+    @app.route('/<matricula>', methods=['GET'])
+    def get_last_date_with_docker(matricula):
+        connection = get_db_connection()
+        cursor = connection.cursor()
+
+        # Query
+        cursor.execute("""
+            SELECT pos_date FROM gps_data
+            WHERE matricula = %s
+        """, (matricula,))
+
+        result = cursor.fetchone()
+
+        if result:
+            response = result[0]
+        else:
+            response = {"Error/Not found"}
+        cursor.close()
+        connection.close()
+
+        return response
+
+
+    if __name__ == '__main__':
+        app.run(debug=True)
 
 
 
