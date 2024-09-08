@@ -4,7 +4,7 @@ import os
 from Domain.gps_data import GpsData
 
 
-class JsonReader:
+class JsonHandler:
 
     def __init__(self, path):
         self.path = path

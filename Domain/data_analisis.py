@@ -24,7 +24,7 @@ def get_last_dates(dict_gps_data):
     # https://blogboard.io/blog/knowledge/python-sorted-lambda/
     sort_date_dict = sorted(dates_dict.items(), key=lambda item: item[1], reverse=True)
 
-    print(posix_to_date(sort_date_dict))
+    # print(posix_to_date(sort_date_dict))
     new_date_format_list = posix_to_date(sort_date_dict)
 
     return new_date_format_list
@@ -40,3 +40,5 @@ def posix_to_date(posix_dates_dict):
         new_date_dict_format[matricula] = new_format
 
     return new_date_dict_format
+
+
