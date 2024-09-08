@@ -11,16 +11,16 @@ CSV_PATH = "Data/reto.csv"
 JSON_PATH = "Json_data/"
 TXT_PATH = "Txt_data/reto 5.txt"
 SQL_FILE_PATH = "init.sql"
-CONSOLE = False
+CONSOLE = True
 
-CASO_1 = False
-CASO_2 = False
-CASO_3 = False
-CASO_4 = False
-CASO_5 = False
+CASO_1 = True
+CASO_2 = True
+CASO_3 = True
+CASO_4 = True
+CASO_5 = True
 CASO_6 = False
 CASO_7 = False
-CASO_8 = True
+CASO_8 = False
 
 # CASO 1. Empezamos por algo fácil: Lee el fichero CSV
 # e imprime cada línea
@@ -115,6 +115,7 @@ if CASO_8:
 
 
     app = Flask(__name__)
+    # https://www.psycopg.org/docs/
     @app.route('/<matricula>', methods=['GET'])
     def get_last_date_with_docker(matricula):
         connection = get_db_connection()
